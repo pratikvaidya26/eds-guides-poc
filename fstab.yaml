@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: https://guides.adobe.com/eds-workers/your-user-name/your-repo-name/main/docs
+    url: https://dita-franklin-worker.adobeaem.workers.dev/pratikvaidya26/eds-csg-guides-poc/main/docs
     type: markup
 
