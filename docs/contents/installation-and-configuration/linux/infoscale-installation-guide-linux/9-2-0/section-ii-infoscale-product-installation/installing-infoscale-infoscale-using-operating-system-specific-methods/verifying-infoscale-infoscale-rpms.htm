@@ -1,0 +1,31 @@
+<!--?xml version="1.0" encoding="utf-8" ?--><!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="../../../../../../../_rhdefault.css"></head><body id="verifying-infoscale-infoscale-rpms" class="" lang="en_US"><div class="breadcrumbs"><div><div><a href="">Section II. InfoScale product installation</a></div><div><a href="">Installing InfoScale InfoScale using operating system-specific methods</a></div><div><a href="contents/installation-and-configuration/linux/infoscale-installation-guide-linux/9-2-0/section-ii-infoscale-product-installation/installing-infoscale-infoscale-using-operating-system-specific-methods/verifying-infoscale-infoscale-rpms">Verifying InfoScale InfoScale RPMs</a></div></div></div><h1 class="title">Verifying InfoScale InfoScale RPMs</h1><div class=""><div class="p"><div><div><span>InfoScale RPMs include digital signatures that are used to verify their authenticity. If you want to install the RPMs manually, you must first import the keys.</span></div></div></div><div class="p"><div><div><span>To import keys</span></div></div></div><ol class="ol"><li class="li"><div class="p"><div><div><span>Import the InfoScale GPG key to verify InfoScale packages:</span></div></div></div></li></ol><div class="p"><div><div><code class="ph codeph display-inline"># rpm --import RPM-GPG-KEY-veritas-infoscale7</code></div></div></div><ol class="ol"><li class="li"><div class="p"><div><div><span>Display the list of InfoScale keys installed for RPM verification:</span></div></div></div></li></ol><div class="p"><div><div><code class="ph codeph display-inline"># rpm -q gpg-pubkey --qf '%{name}-%{version}-%{release} --&gt;%{summary}\n' | grep InfoScale</code></div></div></div><ol class="ol"><li class="li"><div class="p"><div><div><span>Display the fingerprint of the InfoScale key file:</span></div></div></div></li></ol><div class="p"><div><div><code class="ph codeph display-inline"># gpg --quiet --with-fingerprint ./RPM-GPG-KEY-InfoScale-infoscale7</code></div></div></div><div class="p"><div><div><span>Sample output:</span></div></div></div><code class="txt pre-white-space pre codeblock display-block" data-attr-xml:space="preserve" data-attr-outputclass="txt">Key fingerprint = C031 8CAB E668 4669 63DB &nbsp;C8EA 0B0B C720 A17A 604B</code><div class="p"><div><div><span>To display details about the installed InfoScale key file</span></div></div></div><ul class="ul"><li class="li"><div class="p"><div><div><span>Use the </span><code class="ph codeph display-inline">rpm -qi</code><span> command followed by the output from the previous command:</span></div></div></div></li></ul><div class="p"><div><div><code class="ph codeph display-inline"># rpm -qi &lt;gpg-pubkey-file&gt;</code></div></div></div><div class="p"><div><div><span>Alternatively, you can use the following command:</span></div></div></div><div class="p"><div><div><code class="ph codeph display-inline"># rpm -qi </code><span>rpm -q gpg-pubkey --qf '%{name}-%{version}-%{release} --&gt; %{summary}\n' | awk '/Veritas/ { print $1 }'``To check the GnuPG signature of an RPM file</span></div></div></div><ul class="ul"><li class="li"><div class="p"><div><div><span>After importing the builder's GnuPG key, run the following command:</span><code class="ph codeph display-inline"># rpm -K &lt;rpmPackageName&gt;</code><span>If the signature of the package is verified, and it is not corrupt, the following message is displayed:```txt md5 gpg OK</span></div></div></div></li></ul><code class="txt pre-white-space pre codeblock display-block" data-attr-xml:space="preserve" data-attr-outputclass="txt">To verify the signature for all InfoScale InfoScale RPMs<br><br>
+- &nbsp;Run the following command:``# for i in *.rpm; do rpm -K $i; done``Sample outptut:```txt<br><br>
+VRTSamf-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSaslapm-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTScavf-7.4.2.0000-GENERIC.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTScps-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSdbac-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSdbed-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSdocker-plugin-1.4-Linux.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSfssdk-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSgab-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSglm-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSgms-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSllt-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSodm-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSperl-5.30.0.0-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSpython-3.7.4.1-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSsfcpi-7.4.2.0000-GENERIC.noarch.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSsfmh-7.4.2.0000_Linux.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSspt-7.4.2.0000-RHEL7.noarch.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSvbs-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSvcs-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSvcsag-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSvcsea-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSvcsnr-7.4.2.0000-GENERIC.noarch.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSvcswiz-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSveki-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSvlic-4.01.74.004-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSvxfen-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSvxfs-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br>
+VRTSvxvm-7.4.2.0000-RHEL7.x86_64.rpm: rsa sha1 (md5) pgp md5 OK<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></code></div></body></html>

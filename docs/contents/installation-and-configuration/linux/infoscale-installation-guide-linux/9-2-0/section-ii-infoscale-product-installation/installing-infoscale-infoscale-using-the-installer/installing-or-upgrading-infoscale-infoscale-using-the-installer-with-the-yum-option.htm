@@ -1,0 +1,124 @@
+<!--?xml version="1.0" encoding="utf-8" ?--><!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="../../../../../../../_rhdefault.css"></head><body id="installing-or-upgrading-infoscale-infoscale-using-the-installer-with-the--yum-option" class="" lang="en_US"><div class="breadcrumbs"><div><div><a href="">Section II. InfoScale product installation</a></div><div><a href="">Installing InfoScale InfoScale using the installer</a></div><div><a href="contents/installation-and-configuration/linux/infoscale-installation-guide-linux/9-2-0/section-ii-infoscale-product-installation/installing-infoscale-infoscale-using-the-installer/installing-or-upgrading-infoscale-infoscale-using-the-installer-with-the-yum-option">Installing or upgrading InfoScale InfoScale using the installer with the -yum option</a></div></div></div><h1 class="title">Installing or upgrading InfoScale InfoScale using the installer with the -yum option</h1><div class=""><div class="p"><div><div><span>Starting with InfoScale 8.0, you can use yum commands with Common Product Installer and install or upgrade InfoScale 8.0 running on Red Hat and Oracle Linux.</span></div></div></div><div class="p"><div><div><span>Yum is a command-line package management tool that you can use for installing, updating, removing, and managing the InfoScale package. Yum performs dependency resolution when install, update, and remove the InfoScale package. Yum can also manage the package from installed repositories in the system or from the InfoScale .rpm packages. The following new options are supported for the installation and upgrade of InfoScale:</span></div></div></div><ul class="ul"><li class="li"><div class="p"><div><div><span>-yum</span></div></div></div></li><li class="li"><div class="p"><div><div><span>-matrixpath</span></div></div></div></li><li class="li"><div class="p"><div><div><span>-upgradestart</span></div></div></div></li><li class="li"><div class="p"><div><div><span>-upgradestop</span></div></div></div><blockquote class="lq"></blockquote><div class="lq"><div class="p"><div><div><b class="ph b display-inline">Note:</b><span> The new installer options are supported only with InfoScale 8.0. You can perform upgrades from an earlier version to 9.2.0. The supported versions for upgrades are 7.4.1, 7.4.2, and 8.0.</span></div></div></div></div><blockquote class="lq"></blockquote></li></ul><div class="p"><div><div><span>Before you begin</span></div></div></div><div class="p"><div><div><span>Before you begin the configuration of yum, and installation or upgrade of InfoScale, ensure that you:</span></div></div></div><ul class="ul"><li class="li"><div class="p"><div><div><span>Deploy InfoScale in a development or UAT environment first, which is as similar to your production environment as possible. Perform tests in that environment and ensure that there is no incompatibility with your current deployment.</span></div></div></div></li><li class="li"><div class="p"><div><div><span>Perform necessary backups and snapshots of your production system and establish a rollback plan.</span></div></div></div></li></ul><div class="p"><div><div><span>Installation or upgrade</span></div></div></div><div class="p"><div><div><span>There are two ways of yum based installation or upgrade. You can either use the -yum option with installer, or use direct/manual yum method.</span></div></div></div><div class="p"><div><div><span>Using the yum option with installer</span></div></div></div><div class="p"><div><div><span>The following is the syntax and examples for installing InfoScale using the yum installer option. After running any of the following yum installation commands, select the Install a product or Upgrade a product option from the menu displays by installer script.</span></div></div></div><div class="p"><div><div><span>Syntax:</span></div></div></div><div class="p"><div><div><code class="ph codeph display-inline">./installer -yum [repo_name | repo_url]</code></div></div></div><div class="p"><div><div><span>Example for yum installation with repository name:</span></div></div></div><div class="p"><div><div><code class="ph codeph display-inline">./installer -yum repo-Infoscale92</code></div></div></div><div class="p"><div><div><span>Example for yum installation using repository URL:````./installer -yum http://xyz.com/rhel8_x86_64/rpms/``Notes:</span></div></div></div><ul class="ul"><li class="li"><div class="p"><div><div><span>If a repository URL is passed as an argument with the -yum option, you do not need to set the yum repository manually. The CPI installer creates the repository on each node. The repository URL is the base URL that you specify in the repository file while configuring yum repository, and the values for the base URL attribute begins with http://, ftp:/, file:///, or sftp:/</span></div></div></div></li><li class="li"><div class="p"><div><div><span>If a repository name is passed as an argument with the -yum option, the CPI installer assumes that the repository is already configured and enabled on the node, hence, you need not to configure the repository. If a repository name is used and the repository has not yet been configured, then the CPI installer exits with an appropriate error.</span></div></div></div></li></ul><div class="p"><div><div><span>Using -yum and -patch_path options together with -matrixpath</span></div></div></div><div class="p"><div><div><span>The following is the syntax and examples for performing patch installation or patch upgrade along with GA upgrade of InfoScale with RPM files:</span></div></div></div><blockquote class="lq"></blockquote><div class="lq"><div class="p"><div><div><b class="ph b display-inline">Note:</b><span> After running any of the following yum installation commands, select the Install a product or upgrade a product option from the menu displayed by installer script.</span></div></div></div></div><blockquote class="lq"></blockquote><div class="p"><div><div><span>Syntax:</span><code class="ph codeph display-inline">./installer -yum [repo_name | repo_url] -patch_path [repo_name | repo_url] -matrixpath</code><span>Example for performing patch installation or patch upgrade</span><code class="ph codeph display-inline">./installer -yum repo-Infoscale92 -patch_path repo-Infoscale92P -matrixpath /root/patch_matrix</code><span>When you run this command, you need to enter the release matrix data path in the command. You must use the matrixpath option when there is no SORT connectivity on a machine and the -yum and -patch_path options are used together. As installer has pre-checks on the release matrix data, if a correct release matrix data path is not provided, the patch installation or patch upgrade may fail.</span></div></div></div><div class="p"><div><div><span>Direct or manual yum installation</span></div></div></div><div class="p"><div><div><span>Ensure that you set the yum repository manually on each node of the cluster before running the yum install command.</span></div></div></div><div class="p"><div><div><span>For more details on Installing InfoScale InfoScale using yum, refer to the topic:</span></div></div></div><div class="p"><div><div><span>To install InfoScale RPMs using manual yum method</span></div></div></div><ol class="ol"><li class="li"><div class="p"><div><div><span>Specify each RPM name and its yum equivalent. For example:</span><code class="ph codeph display-inline"># yum install VRTSvlic VRTSperl ... VRTSsfcpi</code><span>1. Specify all the InfoScale InfoScale RPMs using RPM glob. For example:</span><code class="ph codeph display-inline"># yum install 'VRTS*</code><span>'</span></div></div></div></li><li class="li"><div class="p"><div><div><span>Specify the group name if a group is configured for InfoScale InfoScale's RPMs.</span></div></div></div><blockquote class="lq"></blockquote><div class="lq"><div class="p"><div><div><b class="ph b display-inline">Note:</b><span> Ensure that the specified name is consistent with the one in the xml file. For example, consider the group name usage as ENTERPRISE92: # yum install @ENTERPRISE92 or # yum groupinstall -y ENTERPRISE92.</span></div></div></div></div><blockquote class="lq"></blockquote></li></ol><div class="p"><div><div><span>Using Direct or manual yum upgrade</span></div></div></div><div class="p"><div><div><span>You can upgrade InfoScale by manually configuring yum repositories on each node of a cluster, and then run the yum upgrade command. You need to use the upgradestop and upgradestart options for manual yum upgrade. The following are the syntax and examples:</span></div></div></div><div class="p"><div><div><span>Syntax for upgradestop:</span><code class="ph codeph display-inline">/opt/VRTS/install/installer -upgradestop</code><span>Use the upgradestop option before you begin to upgrade InfoScale using the yum upgrade command. This command performs required pre-upgrade checks and backups all the configuration files before the upgrade.</span></div></div></div><div class="p"><div><div><span>Syntax for upgradestart:</span><code class="ph codeph display-inline">/opt/VRTS/install/installer -upgradestart</code><span>Use the upgradestart option to start the services after upgrading InfoScale rpms using yum such as starting CVM agents, registering extra types.cf files, and updating protocol version.</span></div></div></div><div class="p"><div><div><span>To upgrade InfoScale using yum</span></div></div></div><ol class="ol"><li class="li"><div class="p"><div><div><span>Disable all the service groups on a cluster.</span></div></div></div></li><li class="li"><div class="p"><div><div><span>Unmount the file system which is not under the VCS control.</span></div></div></div></li><li class="li"><div class="p"><div><div><span>Use the following command to disable the dmp native support:</span><code class="ph codeph display-inline"># vxdmpadm settune dmp_native_support=off</code><span>1. Stop the installer to stop all the services as follows:</span><code class="ph codeph display-inline"># ./installer -upgradestop</code><span>&gt; </span><b class="ph b display-inline">Note:</b><span> The base version for upgradestop is 8.0. You cannot perform direct yum upgrade from earlier versions of InfoScale to 8.0 or later using upgradestop. You may use -stop option with installer, post running./installer -stopcommand. Ensure that all the modules and services are stopped usinglsmodandsystemctlstatus commands and verify the status before proceeding with yum upgrade.</span></div></div></div></li><li class="li"><div class="p"><div><div><span>Copy the</span><code class="ph codeph display-inline">infoscale92.repo</code><span>to</span><code class="ph codeph display-inline">/etc/yum.repos.d/</code><span>on the YUM client machine from the installation media, or you can manually create the</span><code class="ph codeph display-inline">.repo file</code><span>using the following steps:</span></div></div></div></li></ol><div class="p"><div><div><span>i. Create</span><code class="ph codeph display-inline">.repo</code><span>file using any editor </span><a class="xref" data-has-usertext="true" data-attr-keyref="vi,vim or nano"></a><span> as shown below:</span><code class="ph codeph display-inline"># vi /etc/yum.repos.d/Infoscale92.repo</code><span>ii. After executing the above command insert the following values in the .repo file as follows:```txt </span><a class="xref" data-has-usertext="true" data-attr-keyref="repo-InfoScale92"></a><span> name=Repository for InfoScale InfoScale 92 baseurl=file:///\&lt;image_dir\&gt;/rpms/ enabled=1 gpgcheck=1 gpgkey=file:///\&lt;image_dir\&gt;/rpms/RPM-GPG-KEY-veritas-infoscale7</span></div></div></div><code class="txt pre-white-space pre codeblock display-block" data-attr-xml:space="preserve" data-attr-outputclass="txt">Note: The values for the baseurl attribute can start with``http://, ftp://, or file://.``The URL you choose needs to be able to access the repodata directory. It also needs to access all the InfoScale InfoScale RPMs in the repository that you create or update.<br><br>
+iii. Save and exit the text editor<br><br>
+<br><br>
+&gt; **Note:** If you copy the .repo file directly from installation media then you need to update the 'baseurl' and 'gpgkey' entry in/etc/yum.repos.d/Infoscale92.repofor yum repository directory using any text editor.<br><br>
+<br><br>
+1. &nbsp;Run the following commands to refresh the yum repository:<br><br>
+<br><br>
+&nbsp; &nbsp; -``# yum repolist``-``# yum updateinfo``-``# yum grouplist``1. &nbsp;Run the following command to upgrade InfoScale InfoScale product:``# yum upgrade VRTS*``If OS upgrade is involved and a reboot is required, then upgrade both OS and IS at the same time :``# yum upgrade &lt;--releasever=&lt;version&gt;&gt;``1. &nbsp;Repeat steps 5 to 8 on each node of the cluster.<br><br>
+1. &nbsp;After completing all above steps, run the following command to manually generate installer scripts for configuration.``# /opt/VRTS/install/bin/UXRT92/add_install_scripts``1. &nbsp;Run the following command to manually install the``VRTSrest``package on all the cluster nodes.``# yum install VRTSrest``1. &nbsp;Run the following command to start:``# /opt/VRTS/install/installer -upgradestart``After successful completion of yum upgrade ensure that cluster is up and running. You may verify the CVM protocol version using``vxdctl protocolversion``command and VCS protocol version as follows:``/opt/VRTS/bin/haclus -value ProtocolNumber``&gt; **Note:** Ensure that you set the yum repository manually on each node of the cluster before running the yum install and upgrade command.<br><br>
+<br><br>
+Yum install or upgrade with response files<br><br>
+<br><br>
+Yum based install or upgrade can be performed using either menu driven program or response-file.<br><br>
+<br><br>
+**Table:**<br><br>
+<br><br>
+| Variable | Description | List or Scalar | Mandatory or Optional |<br><br>
+| --- | --- | --- | --- |<br><br>
+| CFG{opt}{yum} | The -yum option is used to define the yum repository path or the repository name to be used for performing yum-based tasks. This option is supported on Red Hat Linux and Oracle Linux only. | Scalar | Optional |<br><br>
+| CFG{opt}{matrixpath} | The -matrixpath option is used to accept a user-specified release matrix data path. | Scalar | Optional |<br><br>
+| CFG{opt}{upgradestop} | The -upgradestop option stops all the drivers and the processes. This option is supported only on Red Hat Linux and Oracle Linux. | Scalar | Optional |<br><br>
+| CFG{opt}{upgradestart} | The -upgradestart option starts all drivers and processes of a product where product is upgraded using yum. The option is supported only on Red Hat Linux and Oracle Linux. | Scalar | Optional |<br><br>
+<br><br>
+The following are the sample response files:<br><br>
+<br><br>
+Installation using -yum with reponame:```txt<br><br>
+\#<br><br>
+\# Configuration Values:<br><br>
+\#<br><br>
+our %CFG;<br><br>
+$CFG{accepteula}=1;<br><br>
+```txt<br><br>
+<br><br>
+```txt<br><br>
+<br><br>
+&nbsp; &nbsp; $CFG{opt}{install}=1;<br><br>
+$CFG{opt}{yum}="repo-InfoScale92";<br><br>
+$CFG{prod}="ENTERPRISE92";<br><br>
+$CFG{systems}=[ "dl380g10-10-vip17" ];<br><br>
+<br><br>
+1;<br><br>
+<br><br>
+```txt<br><br>
+<br><br>
+Installation using -yum with repo URL:```txt<br><br>
+#<br><br>
+<br><br>
+## Configuration Values<br><br>
+<br><br>
+#<br><br>
+our %CFG;<br><br>
+<br><br>
+$CFG{accepteula}=1;<br><br>
+<br><br>
+```txt<br><br>
+```txt<br><br>
+<br><br>
+$CFG{opt}{install}=1;<br><br>
+$CFG{opt}{yum}="http://xyz.com/rhel8_x86_64/rpms/";<br><br>
+$CFG{prod}="ENTERPRISE92";<br><br>
+$CFG{systems}=[ "dl380g10-10-vip17" ];<br><br>
+<br><br>
+1;<br><br>
+<br><br>
+```txt<br><br>
+Installation using -yum, -matrixpath and -patch_path:```txt<br><br>
+\#<br><br>
+\# Configuration Values:<br><br>
+\#<br><br>
+our %CFG;<br><br>
+<br><br>
+$CFG{accepteula}=1;<br><br>
+```txt<br><br>
+<br><br>
+```txt<br><br>
+<br><br>
+$CFG{opt}{install}=1;<br><br>
+$CFG{opt}{matrixpath}="/root/patch_matrix/";<br><br>
+$CFG{opt}{patch_path}="repo-InfoScale92P";<br><br>
+$CFG{opt}{yum}="repo-InfoScale92";<br><br>
+$CFG{prod}="ENTERPRISE92";<br><br>
+$CFG{systems}=[ "dl380g10-10-vip17" ];<br><br>
+<br><br>
+1;<br><br>
+<br><br>
+```txt<br><br>
+<br><br>
+&gt; **Note:** For all upgrade operations, you need to enter the newly added options wherever required. Rest of the configuration values are same as per traditional installation and upgrade.<br><br>
+<br><br>
+Upgradestop before manual yum upgrade:```txt<br><br>
+#<br><br>
+<br><br>
+## Configuration Values<br><br>
+<br><br>
+#<br><br>
+our %CFG;<br><br>
+<br><br>
+$CFG{opt}{gco}=1;<br><br>
+$CFG{opt}{stop}=1;<br><br>
+$CFG{opt}{upgradestop}=1;<br><br>
+$CFG{opt}{vr}=1;<br><br>
+$CFG{prod}="ENTERPRISE92";<br><br>
+$CFG{systems}=[ "dl380g10-10-vip17","dl380g10-10-vip18" ];<br><br>
+$CFG{vcs_allowcomms}=1;<br><br>
+<br><br>
+1;<br><br>
+<br><br>
+```txt<br><br>
+Upgradestart after manual yum upgrade:```txt<br><br>
+<br><br>
+\#<br><br>
+\# Configuration Values<br><br>
+\#<br><br>
+our %CFG;<br><br>
+<br><br>
+$CFG{opt}{gco}=1;<br><br>
+$CFG{opt}{start}=1;<br><br>
+$CFG{opt}{upgradestart}=1;<br><br>
+$CFG{opt}{vr}=1;<br><br>
+$CFG{prod}="ENTERPRISE92";<br><br>
+$CFG{systems}=[ "dl380g10-10-vip14" ];<br><br>
+$CFG{vcs_allowcomms}=1;<br><br>
+<br><br>
+1;<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></code><div class="p"><div><div><span>More Information</span></div></div></div><div class="p"><div><div><a class="xref" href="../installing-infoscale-infoscale-using-operating-system-specific-methods/installing-infoscale-using-yum.md" data-attr-href="../installing-infoscale-infoscale-using-operating-system-specific-methods/installing-infoscale-using-yum.md" data-attr-format="dita" data-attr-type="topic">Installing InfoScale using yum</a></div></div></div></div></body></html>

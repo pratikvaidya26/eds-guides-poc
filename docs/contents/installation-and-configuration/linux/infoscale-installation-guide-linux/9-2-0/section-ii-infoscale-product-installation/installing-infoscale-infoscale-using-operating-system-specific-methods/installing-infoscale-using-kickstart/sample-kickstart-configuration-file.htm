@@ -1,0 +1,78 @@
+<!--?xml version="1.0" encoding="utf-8" ?--><!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="../../../../../../../../_rhdefault.css"></head><body id="sample-kickstart-configuration-file" class="" lang="en_US"><div class="breadcrumbs"><div><div><a href="">Section II. InfoScale product installation</a></div><div><a href="">Installing InfoScale InfoScale using operating system-specific methods</a></div><div><a href="">Installing InfoScale using Kickstart</a></div><div><a href="contents/installation-and-configuration/linux/infoscale-installation-guide-linux/9-2-0/section-ii-infoscale-product-installation/installing-infoscale-infoscale-using-operating-system-specific-methods/installing-infoscale-using-kickstart/sample-kickstart-configuration-file">Sample Kickstart configuration file</a></div></div></div><h1 class="title">Sample Kickstart configuration file</h1><div class=""><div class="p"><div><div><span>The following is a sample RedHat Enterprise Linux 7 (RHEL7) Kickstart configuration file.</span></div></div></div><code class="bash pre-white-space pre codeblock display-block" data-attr-xml:space="preserve" data-attr-outputclass="bash">\# The packages below are required and will be installed from<br><br>
+OS installation media automatically during the automated installation<br><br>
+of products in the DVD, if they have not been installed yet.<br><br>
+<br><br>
+%packages<br><br>
+libudev.i686<br><br>
+device-mapper<br><br>
+device-mapper-libs<br><br>
+parted<br><br>
+libgcc.i686<br><br>
+compat-libstdc++-33<br><br>
+ed<br><br>
+ksh<br><br>
+nss-softokn-freebl.i686<br><br>
+glibc.i686<br><br>
+libstdc++.i686<br><br>
+audit-libs.i686<br><br>
+cracklib.i686<br><br>
+db4.i686<br><br>
+libselinux.i686<br><br>
+pam.i686<br><br>
+libattr.i686<br><br>
+libacl.i686<br><br>
+%end<br><br>
+<br><br>
+%post --nochroot<br><br>
+\# Add necessary scripts or commands here to your need<br><br>
+\# This generated kickstart file is only for the automated<br><br>
+installation of products in the DVD<br><br>
+<br><br>
+PATH=$PATH:/sbin:/usr/sbin:/bin:/usr/bin<br><br>
+export PATH<br><br>
+<br><br>
+\#<br><br>
+\# Notice:<br><br>
+\# * Modify the BUILDSRC below according to your real environment<br><br>
+\# * The location specified with BUILDSRC should be NFS accessible<br><br>
+\# &nbsp; to the Kickstart Server<br><br>
+\# * Copy the whole directories of rpms from installation media<br><br>
+\# &nbsp; to the BUILDSRC<br><br>
+\#<br><br>
+<br><br>
+BUILDSRC="&lt;hostname_or_ip&gt;:/path/to/rpms"<br><br>
+<br><br>
+\#<br><br>
+\# Notice:<br><br>
+\# * You do not have to change the following scripts<br><br>
+\#<br><br>
+<br><br>
+\# define path varibles<br><br>
+ROOT=/mnt/sysimage<br><br>
+BUILDDIR="${ROOT}/build"<br><br>
+RPMDIR="${BUILDDIR}/rpms"<br><br>
+<br><br>
+\# define log path<br><br>
+KSLOG="${ROOT}/opt/VRTStmp/kickstart.log"<br><br>
+<br><br>
+echo "==== Executing kickstart post section: ====" &gt;&gt; ${KSLOG}<br><br>
+<br><br>
+mkdir -p ${BUILDDIR}<br><br>
+mount -t nfs -o nolock,vers=3 ${BUILDSRC} ${BUILDDIR} &gt;&gt; ${KSLOG} 2&gt;&amp;1<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></code><code class="bash pre-white-space pre codeblock display-block" data-attr-xml:space="preserve" data-attr-outputclass="bash">\# install rpms one by one<br><br>
+for RPM in VRTSperl VRTSvlic VRTSspt VRTSvxvm VRTSaslapm VRTSvxfs<br><br>
+VRTSllt VRTSgab VRTSvxfen VRTSamf VRTSvcs VRTScps VRTSvcsag<br><br>
+VRTSvcsea VRTSdbed VRTSglm VRTScavf VRTSgms VRTSodm VRTSdbac VRTSsfmh<br><br>
+VRTSvbs VRTSsfcpi VRTSvcswiz<br><br><br><br><br><br><br><br></code><code class="txt pre-white-space pre codeblock display-block" data-attr-xml:space="preserve" data-attr-outputclass="txt">do<br><br>
+&nbsp; &nbsp; echo "Installing package &nbsp;-- $RPM" &gt;&gt; ${KSLOG}<br><br>
+&nbsp; &nbsp; rpm -U -v --root ${ROOT} ${RPMDIR}/${RPM}-* &gt;&gt; ${KSLOG} 2&gt;&amp;1<br><br>
+done<br><br>
+<br><br>
+umount ${BUILDDIR}<br><br>
+<br><br>
+CALLED_BY=KICKSTART ${ROOT}/opt/VRTS/install/bin/UXRT92/<br><br>
+add_install_scripts &gt;&gt; ${KSLOG} 2&gt;&amp;1<br><br>
+<br><br>
+echo "==== Completed kickstart file ====" &gt;&gt; ${KSLOG}<br><br>
+<br><br>
+exit 0<br><br>
+%end<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></code></div></body></html>

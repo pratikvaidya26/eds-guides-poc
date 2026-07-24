@@ -1,0 +1,28 @@
+<!--?xml version="1.0" encoding="utf-8" ?--><!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="../../../../../../../_rhdefault.css"></head><body id="incorrect-permissions-for-root-on-remote-system" class="" lang="en_US"><div class="breadcrumbs"><div><div><a href="">Section IV. Installation reference</a></div><div><a href="">Appendix C. Troubleshooting installation issues</a></div><div><a href="contents/installation-and-configuration/linux/infoscale-installation-guide-linux/9-2-0/section-iv-installation-reference/appendix-c-troubleshooting-installation-issues/incorrect-permissions-for-root-on-remote-system">Incorrect permissions for root on remote system</a></div></div></div><h1 class="title">Incorrect permissions for root on remote system</h1><div class=""><div class="p"><div><div><span>The permissions are inappropriate. Make sure you have remote root access permission on each system to which you are installing.</span></div></div></div><code class="txt pre-white-space pre codeblock display-block" data-attr-xml:space="preserve" data-attr-outputclass="txt">Failed to setup rsh communication on 10.198.89.241:<br><br>
+'rsh 10.198.89.241 &lt;command&gt;' failed<br><br>
+Trying to setup ssh communication on 10.198.89.241.<br><br>
+Failed to setup ssh communication on 10.198.89.241:<br><br>
+Login denied<br><br>
+<br><br>
+Failed to login to remote system(s) 10.198.89.241.<br><br>
+Please make sure the password(s) are correct and superuser(root)<br><br>
+can login to the remote system(s) with the password(s).<br><br>
+If you want to setup rsh on remote system(s), please make sure<br><br>
+rsh with command argument ('rsh &lt;host&gt; &lt;command&gt;') is not<br><br>
+denied by remote system(s).<br><br>
+<br><br>
+Either ssh or rsh is needed to be setup between the local node<br><br>
+and 10.198.89.241 for communication<br><br>
+<br><br>
+Would you like the installer to setup ssh/rsh communication<br><br>
+automatically between the nodes?<br><br>
+Superuser passwords for the systems will be asked. [y,n,q] (y) n<br><br>
+<br><br>
+System verification did not complete successfully<br><br>
+<br><br>
+The following errors were discovered on the systems:<br><br>
+<br><br>
+The ssh permission denied on 10.198.89.241<br><br>
+rsh exited 1 on 10.198.89.241<br><br>
+either ssh or rsh is needed to be setup between the local node<br><br>
+and 10.198.89.241 for communication<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></code><div class="p"><div><div><span>Suggested solution: You need to set up the systems to allow remote access using </span><code class="ph codeph display-inline">ssh</code><span> or </span><code class="ph codeph display-inline">rsh</code><span>.</span></div></div></div><blockquote class="lq"></blockquote><div class="lq"><div class="p"><div><div><b class="ph b display-inline">Note:</b><span> Remove remote shell permissions after completing the InfoScale installation and configuration.</span></div></div></div></div><blockquote class="lq"></blockquote></div></body></html>
